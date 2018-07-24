@@ -1,13 +1,15 @@
 #' kgraph
 #'
-#' Obtains Google Knowledge Graph Search entities for a given keyword.
+#' Obtains Google Knowledge Graph Search entities for a given keyword or set of
+#' entitiy ID's.
 #'
 #' \code{kgraph} can be used to obtain Google Knowledge Graph Search entities
 #' (\url{https://www.google.com/intl/es419/insidesearch/features/search/knowledge.html})
-#' for any given keyword. The obtained \dQuote{kg-id} can then be used to obtain Google Trends information based on
-#' Google's Topic Search, e.g. with the package gtrendsR. This is a set of combined search queries for any
-#' language. For example the topic search query for \dQuote{London the capital
-#' of England}, will not only cover searches for the keyword \dQuote{London} but
+#' for any given keyword. The obtained \dQuote{kg-id} can then be used to obtain
+#' Google Trends information based on Google's Topic Search, e.g. with the
+#' package gtrendsR. This is a set of combined search queries for any language.
+#' For example the topic search query for \dQuote{London the capital of
+#' England}, will not only cover searches for the keyword \dQuote{London} but
 #' also for \dQuote{Londres} in Spanish. Details between the differences of
 #' search over terms and topics are highlighted here
 #' \url{https://support.google.com/trends/answer/4359550}.
@@ -16,14 +18,12 @@
 #'   Search query keyword. Note that only one keyword is allowed a time.
 #'
 #' @param token A character string containing your Google API access token.
-#'   Details about how to obtain your access token can be found here
-#'   (\url{https://developers.google.com/knowledge-graph/how-tos/authorizing}).
 #'
 #' @param ids A vector of entity ID(s) to obtain the Knowledge Graph details.
-#'   Provide in the form of \dQuote(/m/062s4).
+#'   Provide in the form of \dQuote{/m/062s4}.
 #'
-#' @param hl A string specifying the ISO 639 language code (ex.: \dQuote{en} or
-#'   \dQuote{fr}).
+#' @param hl A string specifying the ISO 639 language code (e.g. \dQuote{en} or
+#'   \dQuote{fr}). Default is English.
 #'
 #' @param types A vector of character strings which restricts the returned
 #'   entities. For example, you can specify Person to restrict the results to
@@ -48,9 +48,13 @@
 #'   advisable to play around with the types categories to find out the ones
 #'   working.
 #'
+#'   Provided token has limited quota. Please create and use your own token for
+#'   large queries. Details on how to obtain your access token can be found here
+#'   (\url{https://developers.google.com/knowledge-graph/how-tos/authorizing}).
+#'
 #' @examples
 #' \donttest{
-#' kg <- kgraph("Myst", token = "API_KEY", types = "VideoGame")
+#' kg <- kgraph("Myst", types = "VideoGame")
 #' # get google trends for the first entity using gtrendsR package
 #' topicsearch <- gtrends(kgs$entities[[1]]$id, time = "all")
 #' }
@@ -59,7 +63,7 @@
 #'
 #' @export
 
-kgraph <- function(keyword = "", token, ids = "", hl = "",
+kgraph <- function(keyword = "", token = "", ids = "", hl = "",
                    types = "", prefix = FALSE, limit = 10){
 
   # Error handling
@@ -74,11 +78,16 @@ kgraph <- function(keyword = "", token, ids = "", hl = "",
   }
 
   if (all(keyword != "") & all(ids != "")) {
-    stop("Either keyword or ids can be obtained")
+    stop("Keyword and ids can not be obtained simultaneously")
   }
 
   if (!is.logical(prefix)) {
     stop("Prefix needs to be logical")
+  }
+
+  if (all(token == "")) {
+    message("Using internal token. Please consider own token for large queries.")
+    token <- "AIzaSyDFyQjvAMgga3_Oe86iXPxQRj_FkUQeRF0"
   }
 
   # Create ids string if needed. Requires to be in the form of ?ids=A&ids=B

@@ -1,7 +1,7 @@
 Package: GTT
 Type: Package
 Title: Functions for analysis with Google Trends search traffic information.
-Version: 0.0.1.901
+Version: 0.0.1.902
 Authors@R: person("Oliver", "Schaer", email = "info@oliverschaer.ch",
                     role = c("aut", "cre"))
 URL: https://github.com/mamut86/GTools
