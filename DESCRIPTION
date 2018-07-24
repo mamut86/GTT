@@ -1,4 +1,4 @@
-Package: GTools
+Package: GTT
 Type: Package
 Title: Functions for analysis with Google Trends search traffic information.
 Version: 0.0.1.901
