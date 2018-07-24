@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^testing$
+^NEWS\.md$
+^README\.Rmd$
+^\.travis\.yml$

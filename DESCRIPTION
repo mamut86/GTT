@@ -1,0 +1,13 @@
+Package: GTools
+Type: Package
+Title: Functions for analysis with Google Trends search traffic information.
+Version: 0.0.1.901
+Authors@R: person("Oliver", "Schaer", email = "info@oliverschaer.ch",
+                    role = c("aut", "cre"))
+URL: https://github.com/mamut86/GTools
+BugReports: https://github.com/mamut86/GTools/issues
+Description: The package aims to provide functions which support and facilitate the use of Google Trends time series data.
+License: GPL (>=2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
