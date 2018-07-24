@@ -13,5 +13,5 @@ Planned extensions include
 ### Installation
 For installation from github use the following R code by using devtools:
 
-<pre><code> if (!require("devtools")){install.packages("devtools")}
-devtools::install_github("mamut86/GTools") </code></pre>
+<pre><code>if (!require("devtools")){install.packages("devtools")}
+devtools::install_github("mamut86/GTT") </code></pre>
