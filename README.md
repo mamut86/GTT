@@ -1,3 +1,5 @@
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 # GTT (Google Trends Tools)
 The R package __GTT__ includes functions for additional Google Trends handling.
 
@@ -12,6 +14,7 @@ Planned extensions include
 
 ### Installation
 For installation from github use the following R code by using devtools:
-
-<pre><code>if (!require("devtools")){install.packages("devtools")}
-devtools::install_github("mamut86/GTT") </code></pre>
+```r
+if (!require("devtools")){install.packages("devtools")}
+devtools::install_github("mamut86/GTT")
+```
