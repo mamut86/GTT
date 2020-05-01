@@ -4,8 +4,15 @@
 \alias{kgraph}
 \title{kgraph}
 \usage{
-kgraph(keyword = "", token = "", ids = "", hl = "", types = "",
-  prefix = FALSE, limit = 10)
+kgraph(
+  keyword = "",
+  token = "",
+  ids = "",
+  hl = "en",
+  types = "",
+  prefix = FALSE,
+  limit = 10
+)
 }
 \arguments{
 \item{keyword}{A character vector with the actual Google Knowledge Graph
@@ -16,7 +23,7 @@ Search query keyword. Note that only one keyword is allowed a time.}
 \item{ids}{A vector of entity ID(s) to obtain the Knowledge Graph details.
 Provide in the form of \dQuote{/m/062s4}.}
 
-\item{hl}{A string specifying the ISO 639 language code (e.g. \dQuote{en} or
+\item{hl}{A vector specifying the ISO 639 language codes (e.g. \dQuote{en} or
 \dQuote{fr}). Default is English.}
 
 \item{types}{A vector of character strings which restricts the returned
@@ -27,23 +34,22 @@ types is availabe (\url{http://schema.org/docs/full.html})}
 
 \item{prefix}{If set to \dQuote{TRUE} prefix (initial substring) match
 against names and aliases of entities is allowed. For example, a prefix
-Jung will match entities and aliases such as Jung, Jungle, and Jung-ho
-Kang. Default is \dQuote{FALSE}.}
+\dQuote{Jung} will match entities and aliases such as \dQuote{Jung},
+\dQuote{Jungle}, and \dQuote{Jung-ho Kang}. Default is \dQuote{FALSE}.}
 
 \item{limit}{Sets the maximum of returned entities per call. Default is
-\dQuote{10}, maximum allowed is \dQuote{20}}
+\dQuote{10}, maximum allowed by the API is \dQuote{20}.}
 }
 \value{
-Returns an object of class \dQuote{kgraph}. This is a list containing
-  the entities returned from the call sorted in an ascending order relative
-  to the relevance score.
+Returns an object of class \dQuote{kgraph}. It contains a list with
+  the returned entities in descending order to their relevance score.
 }
 \description{
-Obtains Google Knowledge Graph Search entities for a given keyword or set of
-entitiy ID's.
+Obtains Google Knowledge Graph Search entities details for a given keyword or
+set of entitiy ID's.
 }
 \details{
-\code{kgraph} can be used to obtain Google Knowledge Graph Search entities
+\code{kgraph} can be used to obtain Google Knowledge Graph search entities
 (\url{https://www.google.com/intl/es419/insidesearch/features/search/knowledge.html})
 for any given keyword. The obtained \dQuote{kg-id} can then be used to obtain
 Google Trends information based on Google's Topic Search, e.g. with the
@@ -68,7 +74,7 @@ When using \code{types} often \dQuote{Error:400} is returned since not
 \donttest{
 kg <- kgraph("Myst", types = "VideoGame")
 # get google trends for the first entity using gtrendsR package
-topicsearch <- gtrends(kgs$entities[[1]]$id, time = "all")
+topicsearch <- gtrends(kg$entities[[1]]$id, time = "all")
 }
 
 }
